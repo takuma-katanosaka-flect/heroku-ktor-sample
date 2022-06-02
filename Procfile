@@ -1,1 +1,1 @@
-web: ./build/install/heroku-ktor-sample/bin/heroku-ktor-sample
+web: ./build/install/jp.co.flect.heroku-ktor-sample/bin/jp.co.flect.heroku-ktor-sample
