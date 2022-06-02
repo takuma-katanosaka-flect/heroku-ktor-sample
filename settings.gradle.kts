@@ -1,0 +1,1 @@
+rootProject.name = "jp.co.flect.heroku-ktor-sample"

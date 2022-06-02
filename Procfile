@@ -1,0 +1,1 @@
+web: ./build/install/heroku-ktor-sample/bin/heroku-ktor-sample
