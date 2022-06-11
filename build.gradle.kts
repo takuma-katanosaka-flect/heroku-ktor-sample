@@ -61,6 +61,14 @@ graalvmNative {
     }
 }
 
+abstract class BuildWithGraalVmTask : DefaultTask() {
+    @TaskAction
+    fun build() {
+        Runtime.getRuntime().exec("./gradlew nativeCompile")
+    }
+}
+
 tasks {
-    create("stage").dependsOn("installDist")
+    register<BuildWithGraalVmTask>("buildWithGraal")
+    create("stage").dependsOn("installDist", "buildWithGraal")
 }
