@@ -61,14 +61,13 @@ graalvmNative {
     }
 }
 
-abstract class BuildWithGraalVmTask : DefaultTask() {
-    @TaskAction
-    fun build() {
-        Runtime.getRuntime().exec("./gradlew nativeCompile")
-    }
-}
-
 tasks {
-    register<BuildWithGraalVmTask>("buildWithGraal")
-    create("stage").dependsOn("installDist", "buildWithGraal")
+    create("stage") {
+        group = "build"
+        description = "Build for Heroku"
+        dependsOn("installDist")
+        doFirst {
+            Runtime.getRuntime().exec("./gradlew nativeCompile")
+        }
+    }
 }
