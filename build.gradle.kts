@@ -50,11 +50,13 @@ graalvmNative {
             fallback.set(false)
             verbose.set(true)
 
-            buildArgs.add("--initialize-at-build-time=io.ktor,kotlin")
+            buildArgs.add("--initialize-at-build-time=kotlin,ch.qos.logback")
+            buildArgs.add("--initialize-at-run-time=io.ktor,io.netty")
 
             buildArgs.add("-H:+InstallExitHandlers")
             buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
             buildArgs.add("-H:+ReportExceptionStackTraces")
+            buildArgs.add("-H:+PrintClassInitialization")
 
             imageName.set("graal-server")
         }
@@ -65,9 +67,6 @@ tasks {
     create("stage") {
         group = "build"
         description = "Build for Heroku"
-        dependsOn("installDist")
-        doFirst {
-            Runtime.getRuntime().exec("./gradlew nativeCompile")
-        }
+        dependsOn("installDist", "nativeCompile")
     }
 }
